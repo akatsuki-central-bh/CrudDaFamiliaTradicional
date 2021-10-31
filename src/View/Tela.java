@@ -251,7 +251,7 @@ public class Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
         FileWriter arq;
         try{
-            arq = new FileWriter(tfNome_do_Arquivo.getText() + ".txt");
+            arq = new FileWriter(lbConteudo.getText() + ".txt");
             PrintWriter gravarArq = new PrintWriter(arq);
             gravarArq.println(txConteudo.getText());
             gravarArq.close();
