@@ -44,7 +44,6 @@ public class Tela extends javax.swing.JFrame {
         btnCriar = new javax.swing.JButton();
         btnLer = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnDeletar = new javax.swing.JButton();
         pnPrincipal = new javax.swing.JPanel();
         lbNome_do_Arquivo = new javax.swing.JLabel();
         tfNome_do_Arquivo = new javax.swing.JTextField();
@@ -100,17 +99,12 @@ public class Tela extends javax.swing.JFrame {
             }
         });
 
-        btnDeletar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnDeletar.setText("Deletar");
-
         javax.swing.GroupLayout pnBotoesLayout = new javax.swing.GroupLayout(pnBotoes);
         pnBotoes.setLayout(pnBotoesLayout);
         pnBotoesLayout.setHorizontalGroup(
             pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDeletar)
-                .addGap(18, 18, 18)
                 .addComponent(btnEditar)
                 .addGap(18, 18, 18)
                 .addComponent(btnLer)
@@ -125,8 +119,7 @@ public class Tela extends javax.swing.JFrame {
                 .addGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCriar)
                     .addComponent(btnLer)
-                    .addComponent(btnEditar)
-                    .addComponent(btnDeletar))
+                    .addComponent(btnEditar))
                 .addGap(19, 19, 19))
         );
 
@@ -303,7 +296,6 @@ public class Tela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCriar;
-    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnLer;
     private javax.swing.JScrollPane jScrollPane1;
