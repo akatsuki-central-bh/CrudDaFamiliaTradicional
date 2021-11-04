@@ -20,8 +20,20 @@ public class Nova_Tela extends javax.swing.JFrame {
     /**
      * Creates new form Nova_Tela
      */
+    
     public Nova_Tela() {
         initComponents();
+    }
+    
+    public Nova_Tela(String[] modelo) {
+        initComponents();
+        
+        tfAno.setText(modelo[0]);
+        tfDocumento.setText(modelo[1]);
+        tfAtoNormativo.setText(modelo[2]);
+        txEmenta.setText(modelo[3]);
+        tfLink.setText(modelo[4]);
+        tfStatus.setText(modelo[5]);
     }
 
     /**
