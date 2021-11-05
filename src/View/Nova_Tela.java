@@ -5,6 +5,8 @@
  */
 package View;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -62,11 +64,15 @@ public class Nova_Tela extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txEmenta = new javax.swing.JTextArea();
         pnBotoes = new javax.swing.JPanel();
-        btnBuscar = new javax.swing.JButton();
+        btnCriar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         lbTopo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbTopo.setText("Nome_do_Projeto");
@@ -123,6 +129,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 
         txEmenta.setColumns(20);
         txEmenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txEmenta.setLineWrap(true);
         txEmenta.setRows(5);
         jScrollPane1.setViewportView(txEmenta);
 
@@ -181,11 +188,11 @@ public class Nova_Tela extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
         );
 
-        btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnCriar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnCriar.setText("Criar");
+        btnCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                btnCriarActionPerformed(evt);
             }
         });
 
@@ -210,7 +217,7 @@ public class Nova_Tela extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnEditar)
                 .addGap(18, 18, 18)
-                .addComponent(btnBuscar)
+                .addComponent(btnCriar)
                 .addGap(20, 20, 20))
         );
         pnBotoesLayout.setVerticalGroup(
@@ -218,7 +225,7 @@ public class Nova_Tela extends javax.swing.JFrame {
             .addGroup(pnBotoesLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
+                    .addComponent(btnCriar)
                     .addComponent(btnEditar)
                     .addComponent(btnDeletar))
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -255,32 +262,18 @@ public class Nova_Tela extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        String conteudo = "";
-        try {
-            FileReader arq = new FileReader("entrada.txt");
-            BufferedReader lerArq = new BufferedReader(arq);
-            String linha = "";
-            try {
-                linha = lerArq.readLine();
-                while(linha != null){
-                    String[] coluna = linha.split(";");
-                    conteudo += linha + "\r\n";
-                    linha = lerArq.readLine();
-                }
-                arq.close();
-            } catch (IOException ex){
-                JOptionPane.showMessageDialog(null, "Não foi possível ler o arquivo!");
-            }
-        } catch (FileNotFoundException ex){
-            JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCriarActionPerformed
 
+    
     private void tfLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLinkActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfLinkActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -318,7 +311,7 @@ public class Nova_Tela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCriar;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JScrollPane jScrollPane1;

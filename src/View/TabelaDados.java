@@ -153,6 +153,7 @@ public class TabelaDados extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         System.out.println();
         int indice = jTable1.getSelectedRow();
+//        setVisible(false);
         new Nova_Tela(tabela.get(indice)).setVisible(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
