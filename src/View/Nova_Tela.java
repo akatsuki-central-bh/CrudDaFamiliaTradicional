@@ -5,13 +5,9 @@
  */
 package View;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 /**
  *
@@ -25,11 +21,17 @@ public class Nova_Tela extends javax.swing.JFrame {
     
     public Nova_Tela() {
         initComponents();
+        btnDeletar.setEnabled(false);
+        btnEditar.setEnabled(false);
     }
     
     public Nova_Tela(String[] modelo) {
         initComponents();
-        
+        setModelo(modelo);
+        btnCriar.setEnabled(false);
+    }
+    
+    public void setModelo(String[] modelo) {
         tfAno.setText(modelo[0]);
         tfDocumento.setText(modelo[1]);
         tfAtoNormativo.setText(modelo[2]);
@@ -198,11 +200,6 @@ public class Nova_Tela extends javax.swing.JFrame {
 
         btnEditar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
 
         btnDeletar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnDeletar.setText("Deletar");
@@ -214,21 +211,21 @@ public class Nova_Tela extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDeletar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCriar)
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
         pnBotoesLayout.setVerticalGroup(
             pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnBotoesLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBotoesLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCriar)
                     .addComponent(btnEditar)
                     .addComponent(btnDeletar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,22 +255,18 @@ public class Nova_Tela extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnCriarActionPerformed
-
     
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        dispose();
+    }//GEN-LAST:event_formWindowClosing
+
     private void tfLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLinkActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfLinkActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
         dispose();
-    }//GEN-LAST:event_formWindowClosing
+    }//GEN-LAST:event_btnCriarActionPerformed
 
     /**
      * @param args the command line arguments
