@@ -1,8 +1,12 @@
 package model;
 
-public class Doc {
-	private String ano, documento, atoNormativo, ementa, link, status;
+import java.io.Serializable;
 
+public class Doc implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	private String ano, documento, atoNormativo, ementa, link, status;
+	
 	public Doc(String ano, String documento, String atoNormativo, String ementa, String link, String status) {
 		this.ano = ano;
 		this.documento = documento;
