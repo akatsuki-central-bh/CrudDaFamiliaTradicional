@@ -28,7 +28,7 @@ public class TabelaDados extends javax.swing.JFrame {
         tabela_default = new ArrayList();
 
         try {
-            FileReader arq = new FileReader("legislacao-ambiental-brasileira.txt");
+            FileReader arq = new FileReader("legislacao-ambiental-brasileira.csv");
             BufferedReader lerArq = new BufferedReader(arq);
             String linha = "";
             try {
@@ -40,10 +40,10 @@ public class TabelaDados extends javax.swing.JFrame {
                 }
                 arq.close();
             } catch (IOException ex){
-                JOptionPane.showMessageDialog(null, "Não foi possível ler o arquivo!");
+                JOptionPane.showMessageDialog(null, "nao foi possivel ler o arquivo!");
             }
         } catch (FileNotFoundException ex){
-            JOptionPane.showMessageDialog(null, "Arquivo não encontrado!");
+            JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
         }
         
         exibirTabela(tabela_default);

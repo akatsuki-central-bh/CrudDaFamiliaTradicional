@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+import Control.DocControler;
+import model.Doc;
+
 /**
  *
  * @author cauaa7
