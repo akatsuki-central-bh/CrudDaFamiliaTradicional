@@ -1,25 +1,27 @@
 package Control;
 
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import model.Doc;
 
 public class DocControler {
 	public static void escrever(Doc doc) {
 		try {
-			FileOutputStream arquivoGrav = new FileOutputStream("Docs.dat");
-	        ObjectOutputStream objGravar = new ObjectOutputStream(arquivoGrav);
-	        objGravar.writeObject(doc);
-	        objGravar.flush();
-	        objGravar.close();
+			BufferedWriter writer = new BufferedWriter(new FileWriter("legislacao-ambiental-brasileira.txt", true));
+			String linha = doc.getAno() + ";" + doc.getDocumento() + ";" + doc.getAtoNormativo() + ";" + doc.getEmenta()
+			+ ";" + doc.getLink() + ";" + doc.getStatus();
+			writer.append("\n" + linha);
+			writer.close();
+			JOptionPane.showMessageDialog(null, "Documento gravado com sucesso!");
 	        System.out.println("Objeto gravado com sucesso!");;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -30,7 +32,7 @@ public class DocControler {
 		Doc Doc = null;
 		ObjectInputStream obj = null;
 		try {
-			arquivo = new FileInputStream("./Docs.obj");
+			arquivo = new FileInputStream("./Docs.dat");
 			obj = new ObjectInputStream(arquivo);
 			do {
 				Doc = (Doc) obj.readObject();

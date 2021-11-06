@@ -64,4 +64,14 @@ public class Doc implements Serializable {
 		this.status = status;
 	}
 	
+	@Override
+	public String toString() {
+		return "Ano: "+getAno()+"/nDocumentoo: "+getDocumento()+
+				"\nAto Normativo: "+getAtoNormativo()+
+				"\nDocumento:"+getDocumento()+
+				"\nEmenta: "+getEmenta()+
+				"\nLink: "+getLink()+
+				"\nStatus: "+getStatus();
+	}
+	
 }
