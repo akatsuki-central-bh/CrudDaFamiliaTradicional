@@ -36,7 +36,7 @@ public class teste {
 			int id = 0;
 			String novaLinha;
 			while (linha != null) {
-				novaLinha = Integer.toString(id)+";" + linha+"\n";
+				novaLinha = Integer.toString(id) + ";" + linha + "\n";
 				writer.write(novaLinha);
 				id++;
 				linha = lerArq.readLine();
@@ -48,12 +48,11 @@ public class teste {
 
 	public static void listarDocumentos() {
 		ArrayList<Doc> Docs = DocControler.ler();
-		System.out.println(DocControler.count);
-		//for (Doc doc : Docs) {
-			//System.out.println(doc.toString());
-		//}
+		for (Doc doc : Docs) {
+			System.out.println(doc.toString());
+		}
 	}
-	
+
 	public static void main(String[] args) {
 		listarDocumentos();
 	}
