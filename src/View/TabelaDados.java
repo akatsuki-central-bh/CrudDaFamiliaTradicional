@@ -26,9 +26,9 @@ public class TabelaDados extends javax.swing.JFrame {
         initComponents();
         
         tabela_default = new ArrayList();
-
+        
         try {
-            FileReader arq = new FileReader("legislacao-ambiental-brasileira.csv");
+            FileReader arq = new FileReader("legislacao-ambiental-brasileira.txt");
             BufferedReader lerArq = new BufferedReader(arq);
             String linha = "";
             try {
