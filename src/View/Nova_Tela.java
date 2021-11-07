@@ -235,8 +235,8 @@ public class Nova_Tela extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditarActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_btnEditarActionPerformed
+		
+	}
 
 	private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCriarActionPerformed
 		try {

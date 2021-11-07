@@ -11,8 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,9 +26,9 @@ public class TabelaDados extends javax.swing.JFrame {
         initComponents();
         
         tabela_default = new ArrayList();
-
+        
         try {
-            FileReader arq = new FileReader("legislacao-ambiental-brasileira.csv");
+            FileReader arq = new FileReader("legislacao-ambiental-brasileira.txt");
             BufferedReader lerArq = new BufferedReader(arq);
             String linha = "";
             try {

@@ -66,7 +66,8 @@ public class Doc implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Ano: "+getAno()+"/nDocumentoo: "+getDocumento()+
+		return "\nAno: "+getAno()+
+				"\nDocumento: "+getDocumento()+
 				"\nAto Normativo: "+getAtoNormativo()+
 				"\nDocumento:"+getDocumento()+
 				"\nEmenta: "+getEmenta()+
