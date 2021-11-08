@@ -4,10 +4,17 @@ import java.io.Serializable;
 
 public class Doc implements Serializable {
 	private static final long serialVersionUID = 1L;
+	int id;
+	String ano;
+	String documento;
+	String atoNormativo;
+	String ementa;
+	String link;
+	String status;
+
 	
-	private String ano, documento, atoNormativo, ementa, link, status;
-	
-	public Doc(String ano, String documento, String atoNormativo, String ementa, String link, String status) {
+	public Doc(int id, String ano, String documento, String atoNormativo, String ementa, String link, String status) {
+		this.id = id;
 		this.ano = ano;
 		this.documento = documento;
 		this.atoNormativo = atoNormativo;
@@ -64,9 +71,22 @@ public class Doc implements Serializable {
 		this.status = status;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getLinha() {
+		return Integer.toString(getId()) + ";" + getAno() + ";" + getDocumento() + ";"
+				+ getAtoNormativo() + ";" + getEmenta() + ";" + getLink() + ";" + getStatus();
+	}
+	
 	@Override
 	public String toString() {
-		return "\nAno: "+getAno()+
+		return "\nId: "+getId()+
+				"\nAno: "+getAno()+
 				"\nDocumento: "+getDocumento()+
 				"\nAto Normativo: "+getAtoNormativo()+
 				"\nDocumento:"+getDocumento()+
