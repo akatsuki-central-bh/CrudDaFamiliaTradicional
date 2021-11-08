@@ -33,7 +33,7 @@ public class DocControler {
 		ArrayList<Doc> ArrayDocumentos = new ArrayList();
 		Doc doc;
 		try {
-			FileReader arq = new FileReader("legislacao-ambiental-brasileira.txt");
+			FileReader arq = new FileReader("legislacao-ambiental-brasileira-testes.txt");
 			BufferedReader lerArq = new BufferedReader(arq);
 			String linha = "";
 			try {
@@ -55,7 +55,24 @@ public class DocControler {
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
 		}
-		return ArrayDocumentos;
 
+		try {
+			ordenaDados(ArrayDocumentos, 1);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		return ArrayDocumentos;
+		// return dadosOrd;
+
+	}
+
+	public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao){
+		HeapSort heap = new HeapSort();
+		switch (modoDeOrdenacao){
+			case 1:
+				heap.heapSort(dados);
+		}
+		return dados;
 	}
 }
