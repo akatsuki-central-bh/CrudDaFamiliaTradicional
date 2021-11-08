@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Doc implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private String ano, documento, atoNormativo, ementa, link, status, linhaCompleta;
+	private String ano, documento, atoNormativo, ementa, link, status;
 	
 	public Doc(String ano, String documento, String atoNormativo, String ementa, String link, String status) {
 		this.ano = ano;
@@ -14,11 +14,11 @@ public class Doc implements Serializable {
 		this.ementa = ementa;
 		this.link = link;
 		this.status = status;
-		this.linhaCompleta = ano + documento + atoNormativo + ementa + link + status;
 	}
 
 	public String getLinhaCompleta() {
-		return linhaCompleta;
+		return ";"+ this.getAno() + ";" + this.getDocumento() + ";" + this.getAtoNormativo() + ";" + this.getEmenta()
+					+ ";" + this.getLink() + ";" + this.getStatus();
 	}
 
 	public String getAno() {

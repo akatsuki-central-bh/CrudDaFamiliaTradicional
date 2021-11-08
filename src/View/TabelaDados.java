@@ -29,11 +29,8 @@ public class TabelaDados extends javax.swing.JFrame {
      */
     public TabelaDados() {
         initComponents();
-        
         tabela_default = DocControler.ler();
- 
-        DocControler.ordenaDados(tabela_default, ModosDeOrdenacao.ANO);
-
+        // DocControler.ordenaDados(tabela_default, ModosDeOrdenacao.NUMERO_DECRETO_DE_LEI); <<< ---    ORDENAÇÃO
         exibirTabela(tabela_default);
     }
 

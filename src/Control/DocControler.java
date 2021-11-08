@@ -33,7 +33,7 @@ public class DocControler {
 		ArrayList<Doc> ArrayDocumentos = new ArrayList();
 		Doc doc;
 		try {
-			FileReader arq = new FileReader("legislacao-ambiental-brasileira-testes.txt");
+			FileReader arq = new FileReader("legislacao-ambiental-brasileira.txt");
 			BufferedReader lerArq = new BufferedReader(arq);
 			String linha = "";
 			try {
@@ -63,16 +63,21 @@ public class DocControler {
 		}
 
 		return ArrayDocumentos;
-		// return dadosOrd;
-
 	}
 
 	public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao){
 		HeapSort heap = new HeapSort();
+		MergeSort merge = new MergeSort();
 		switch (modoDeOrdenacao){
 			case 1:
 				heap.heapSort(dados);
+			case 2:
+				merge.mergeSort(dados);
 		}
 		return dados;
+	}
+
+	public static void DeletarDados( int id ){
+
 	}
 }
