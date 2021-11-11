@@ -7,8 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -33,10 +33,9 @@ public class DocControler {
 		}
 	}
 
-	public static void deletar() { // passa as linhas para um arraylist, remove o primeiro, apaga o arquivo txt e						
-		try {						// cria um novo com os arquivos do arraylist
-			File txt = new File("legislacao-ambiental-brasileira.txt");
-			BufferedReader lerArq = new BufferedReader(new FileReader(txt));
+	public static void deletar() { // passa as linhas para um arraylist, remove o primeiro, apaga o arquivo txt e
+		try { // cria um novo com os arquivos do arraylist
+			BufferedReader lerArq = new BufferedReader(new FileReader(diretorio));
 			ArrayList<String> salvar = new ArrayList<String>();
 			String linha = lerArq.readLine();
 			while (linha != null) {
@@ -45,8 +44,8 @@ public class DocControler {
 			}
 			lerArq.close();
 			salvar.remove(0);
-			txt.delete();
-			BufferedWriter writer = new BufferedWriter(new FileWriter(txt, true));
+			diretorio.delete();
+			BufferedWriter writer = new BufferedWriter(new FileWriter(diretorio, true));
 			for (String string : salvar) {
 				writer.write(string + "\n");
 			}
@@ -108,6 +107,36 @@ public class DocControler {
 		}
 
 		return nextId;
+	}
+
+	public static void alterarDoc(Doc d) {
+		ArrayList<Doc> docs = getArrayDocs();
+		for (int i = 0; i < docs.size(); i++) {
+			if (docs.get(i).getId() == d.getId()) {
+				docs.set(i, d);
+				salvar(docs);
+				System.out.println("alterado com sucesso");
+				break;
+			}
+		}
+	}
+
+	public static void salvar(ArrayList<Doc> listaDoc) {
+		ArrayList<String> listaString = new ArrayList<String>();
+		for (Doc doc : listaDoc) {
+			listaString.add(doc.getLinha());
+		}
+		diretorio.delete();
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(diretorio, true));
+			for (String linha : listaString) {
+				writer.write(linha+"\n");
+			}
+			writer.flush();
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

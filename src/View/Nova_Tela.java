@@ -238,7 +238,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 
 	private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCriarActionPerformed
 		try {
-			Doc doc = new Doc(tfAno.getText(), tfDocumento.getText(), tfAtoNormativo.getText(), 
+			Doc doc = new Doc(DocControler.getNextId(), tfAno.getText(), tfDocumento.getText(), tfAtoNormativo.getText(), 
 							  txEmenta.getText(), tfLink.getText(), tfStatus.getText());
 			DocControler.escrever(doc);
 		} catch (Exception e) {

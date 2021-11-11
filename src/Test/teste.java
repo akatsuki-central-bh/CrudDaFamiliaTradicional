@@ -14,8 +14,8 @@ import model.Doc;
 public class teste {
 	public static void escrever() { 
 		try {
-			Doc doc = new Doc(DocControler.getNextId(), "2055", "DocTeste", "AtoNormativo Teste", "EmentaTest", "Teste", "Teste");
-			BufferedWriter writer = new BufferedWriter(new FileWriter("legislacao-ambiental-brasileira.txt", true));
+			Doc doc = new Doc(8000, "2055", "DocTeste", "AtoNormativo Teste", "EmentaTest", "Teste", "Teste");
+			BufferedWriter writer = new BufferedWriter(new FileWriter(DocControler.diretorio, true));
 			String linha = doc.getLinha();
 			writer.append("\n" + linha);
 			writer.close();
@@ -26,8 +26,8 @@ public class teste {
 
 	}
 
-	public static void gerarId() { //gera id pra todo mundo do txt, NAO USEM ESSE METODO, SO SE NAO TIVER ID NO TXT DE VCS BLZ?
-		try {
+	public static void gerarId() { //NAO USEM ESSE METODO, SO SE NAO TIVER ID NO TXT DE VCS BLZ?
+		try {              //GERA ID PARA TODAS AS LINHAS, POREM JA ATIVEI ELE UMA VEZ, SE ATIVAR DENOVO VAI DUPLICAR
 			BufferedWriter writer = new BufferedWriter(new FileWriter("entrada.txt", true));
 			FileReader arq = new FileReader("legislacao-ambiental-brasileira.txt");
 			BufferedReader lerArq = new BufferedReader(arq);
@@ -53,8 +53,7 @@ public class teste {
 	}
 
 	public static void main(String[] args) {
-		listarDocumentos();
 		//ESCREVE AQUI OS METODOS Q VC QUER TESTAR E EXECUTA A CLASSE, COMO FIZ ACIMA LISTANDO OS DOCUMENTOS.
-		//SE QUISER CRIAR UM METODO DE TESTE FICA A VONTS.
+		//SE QUISER CRIAR UM METODO DE TESTE FICA A VONTS. SÓ NAO ESQUECE DE DESFAZER A OPERAÇÃO DPS Q FOR FEITA
 	}
 }
