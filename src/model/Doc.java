@@ -23,6 +23,11 @@ public class Doc implements Serializable {
 		this.status = status;
 	}
 
+	public String getLinhaCompleta() {
+		return ";"+ this.getAno() + ";" + this.getDocumento() + ";" + this.getAtoNormativo() + ";" + this.getEmenta()
+					+ ";" + this.getLink() + ";" + this.getStatus();
+	}
+
 	public String getAno() {
 		return ano;
 	}

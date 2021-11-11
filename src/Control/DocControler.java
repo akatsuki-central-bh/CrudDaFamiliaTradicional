@@ -87,7 +87,29 @@ public class DocControler {
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
 		}
+
+		try {
+			ordenaDados(ArrayDocumentos, 1);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
 		return ArrayDocumentos;
+	}
+
+	public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao){
+		HeapSort heap = new HeapSort();
+		MergeSort merge = new MergeSort();
+		switch (modoDeOrdenacao){
+			case 1:
+				heap.heapSort(dados);
+			case 2:
+				merge.mergeSort(dados);
+		}
+		return dados;
+	}
+
+	public static void DeletarDados( int id ){
 
 	}
 
