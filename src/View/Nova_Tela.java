@@ -11,12 +11,16 @@ import java.awt.event.ActionListener;
 
 import Control.DocControler;
 import model.Doc;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
  * @author cauaa7
  */
 public class Nova_Tela extends javax.swing.JFrame {
+
+	private int idDoc;
 
 	/**
 	 * Creates new form Nova_Tela
@@ -26,17 +30,21 @@ public class Nova_Tela extends javax.swing.JFrame {
 		initComponents();
 	}
 
-	public Nova_Tela(String[] modelo) {
+	public Nova_Tela(Doc d) {
 		initComponents();
-
-		tfAno.setText(modelo[0]);
-		tfDocumento.setText(modelo[1]);
-		tfAtoNormativo.setText(modelo[2]);
-		txEmenta.setText(modelo[3]);
-		tfLink.setText(modelo[4]);
-		tfStatus.setText(modelo[5]);
+		this.idDoc = d.getId();
+		tfAno.setText(d.getAno());
+		tfDocumento.setText(d.getDocumento());
+		tfAtoNormativo.setText(d.getAtoNormativo());
+		txEmenta.setText(d.getEmenta());
+		tfLink.setText(d.getLink());
+		tfStatus.setText(d.getStatus());
 	}
 
+	private void alterarDoc(Doc novo){
+		novo.setId(this.idDoc);
+		DocControler.alterarDoc(novo);
+	}
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +73,37 @@ public class Nova_Tela extends javax.swing.JFrame {
 		txEmenta = new javax.swing.JTextArea();
 		pnBotoes = new javax.swing.JPanel();
 		btnCriar = new javax.swing.JButton();
+		btnCriar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					int id = DocControler.getNextId();
+					Doc newDoc = 	new Doc(id, tfAno.getText(), tfDocumento.getText(), tfAtoNormativo.getText(), txEmenta.getText(), tfLink.getText(), tfStatus.getText());
+					DocControler.escrever( newDoc );
+				} catch (Exception error) {
+					System.err.println(error.getMessage());
+				}
+			}
+		});
 		btnEditar = new javax.swing.JButton();
+		btnEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+					Doc docAlterado = new Doc(
+					0,
+					tfAno.getText(),
+					tfDocumento.getText(),
+					tfAtoNormativo.getText(),
+					txEmenta.getText(),
+					tfLink.getText(),
+					tfStatus.getText()
+				);
+
+				alterarDoc(docAlterado);
+
+			}
+		});
 		btnDeletar = new javax.swing.JButton();
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
@@ -73,7 +111,8 @@ public class Nova_Tela extends javax.swing.JFrame {
 				formWindowClosing(evt);
 			}
 		});
-
+		
+		
 		lbTopo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 		lbTopo.setText("Nome_do_Projeto");
 
@@ -230,6 +269,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 						.addContainerGap()));
 
 		pack();
+		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditarActionPerformed
@@ -238,8 +278,15 @@ public class Nova_Tela extends javax.swing.JFrame {
 
 	private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCriarActionPerformed
 		try {
-			Doc doc = new Doc(DocControler.getNextId(), tfAno.getText(), tfDocumento.getText(), tfAtoNormativo.getText(), 
-							  txEmenta.getText(), tfLink.getText(), tfStatus.getText());
+			Doc doc = new Doc(
+				DocControler.getNextId(),
+				tfAno.getText(),
+				tfDocumento.getText(),
+				tfAtoNormativo.getText(), 
+				txEmenta.getText(),
+				tfLink.getText(),
+				tfStatus.getText()
+			);
 			DocControler.escrever(doc);
 		} catch (Exception e) {
 			e.printStackTrace();
