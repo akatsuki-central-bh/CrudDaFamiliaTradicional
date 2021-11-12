@@ -130,13 +130,22 @@ public class DocControler {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(diretorio, true));
 			for (String linha : listaString) {
-				writer.write(linha+"\n");
+				writer.write(linha + "\n");
 			}
 			writer.flush();
 			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static ArrayList<String> getListaString(ArrayList<Doc> docs) {
+		ArrayList<String> listaString = new ArrayList<String>();
+		for (Doc doc : docs) {
+			listaString.add(doc.getLinha());
+		}
+		return listaString;
+
 	}
 
 }
