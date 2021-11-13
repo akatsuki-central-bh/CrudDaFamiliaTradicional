@@ -15,6 +15,7 @@ import javax.swing.plaf.DimensionUIResource;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 
 
 /**
@@ -103,6 +104,7 @@ public class TabelaDados extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setWidth(0);
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.setDefaultEditor(Object.class,null);
         // jTable1.getColumnModel().getColumn(0).set
         jScrollPane1.setViewportView(jTable1);
 
@@ -180,12 +182,11 @@ public class TabelaDados extends javax.swing.JFrame {
         Doc d = DocControler.getById(index);
         System.out.println(index);
         System.out.println(d.getId());
-        if(selecionado == null){
-            selecionado = new Nova_Tela(d);
-            selecionado.setVisible(true);
-        }else{
-            // selecionado.setModelo(d);
-        }
+        if(evt.getClickCount() == 2){
+            if(selecionado == null){
+                selecionado = new Nova_Tela(d);
+                selecionado.setVisible(true);
+        }}
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed

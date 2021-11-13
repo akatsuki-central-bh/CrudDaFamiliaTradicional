@@ -114,7 +114,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 		
 		
 		lbTopo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-		lbTopo.setText("Nome_do_Projeto");
+		lbTopo.setText("APS CRUD");
 
 		javax.swing.GroupLayout pnTopoLayout = new javax.swing.GroupLayout(pnTopo);
 		pnTopo.setLayout(pnTopoLayout);
@@ -288,6 +288,12 @@ public class Nova_Tela extends javax.swing.JFrame {
 				tfStatus.getText()
 			);
 			DocControler.escrever(doc);
+			tfAno.setText("");
+			tfDocumento.setText("");
+			tfAtoNormativo.setText("");
+			txEmenta.setText("");
+			tfLink.setText("");
+			tfStatus.setText("");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
