@@ -33,6 +33,7 @@ public class DocControler {
     }
 
     public static ArrayList<Doc> getArrayDocs() { // retorna um array com todas as linhas do txt
+        documentos.clear();
 		try {
 			FileReader arq = new FileReader(diretorio);
 			BufferedReader lerArq = new BufferedReader(arq);
