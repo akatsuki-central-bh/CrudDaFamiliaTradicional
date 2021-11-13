@@ -34,40 +34,40 @@ public class DocControler {
 
     public static ArrayList<Doc> getArrayDocs() { // retorna um array com todas as linhas do txt
         documentos.clear();
-		try {
-			FileReader arq = new FileReader(diretorio);
-			BufferedReader lerArq = new BufferedReader(arq);
-			String linha = "";
-			try {
-				linha = lerArq.readLine();
-				while (linha != null) {
-					String[] colunas = linha.split(";");
-					try {
-						Doc doc = new Doc(Integer.parseInt(colunas[0]), colunas[1], colunas[2], colunas[3], colunas[4],
-						colunas[5], colunas[6]);
-						documentos.add(doc);
-					} catch (Exception e) {
-						// e.printStackTrace(); 515 linhas com erro de tamanho(n tem os 5 campos
-						// preenchidos)
-					}
-					linha = lerArq.readLine();
-				}
-				arq.close();
+        try {
+            FileReader arq = new FileReader(diretorio);
+            BufferedReader lerArq = new BufferedReader(arq);
+            String linha = "";
+            try {
+                linha = lerArq.readLine();
+                while (linha != null) {
+                    String[] colunas = linha.split(";");
+                    try {
+                        Doc doc = new Doc(Integer.parseInt(colunas[0]), colunas[1], colunas[2], colunas[3], colunas[4],
+                                colunas[5], colunas[6]);
+                        documentos.add(doc);
+                    } catch (Exception e) {
+                        // e.printStackTrace(); 515 linhas com erro de tamanho(n tem os 5 campos
+                        // preenchidos)
+                    }
+                    linha = lerArq.readLine();
+                }
+                arq.close();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "nao foi possivel ler o arquivo!");
             }
-		} catch (FileNotFoundException ex) {
-			JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
-		}
-		
-		try {
-			ordenaDados(documentos, 1);
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		
-		return documentos;
-	}
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
+        }
+
+        try {
+            ordenaDados(documentos, 1);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return documentos;
+    }
 
     public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao) {
         HeapSort heap = new HeapSort();
@@ -84,7 +84,7 @@ public class DocControler {
     public static int getNextId() throws FileNotFoundException {
         getArrayDocs();
         Doc lastDoc = documentos.get(documentos.size() - 1);
-        return  lastDoc.getId() + 1;
+        return lastDoc.getId() + 1;
     }
 
     public static void alterarDoc(Doc d) {
