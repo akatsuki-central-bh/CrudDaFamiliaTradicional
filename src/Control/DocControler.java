@@ -113,16 +113,12 @@ public class DocControler {
         return null;
     }
 
-    public static void salvar(ArrayList<Doc> listaDoc) {
-        ArrayList<String> listaString = new ArrayList<String>();
-        for (Doc doc : listaDoc) {
-            listaString.add(doc.getLinha());
-        }
+    public static void salvar() {
         diretorio.delete();
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(diretorio, true));
-            for (String linha : listaString) {
-                writer.write(linha + "\n");
+            for (Doc doc : documentos) {
+                writer.write(doc.getLinha() + "\n");
             }
             writer.flush();
             writer.close();
