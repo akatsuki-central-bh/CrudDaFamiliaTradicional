@@ -28,28 +28,8 @@ public class DocControler {
     }
 
     public static void deletar() { // passa as linhas para um arraylist, remove o primeiro, apaga o arquivo txt e
-        try { // cria um novo com os arquivos do arraylist
-            BufferedReader lerArq = new BufferedReader(new FileReader(diretorio));
-            ArrayList<String> salvar = new ArrayList<String>();
-            String linha = lerArq.readLine();
-            while (linha != null) {
-                salvar.add(linha);
-                linha = lerArq.readLine();
-            }
-            lerArq.close();
-            salvar.remove(0);
-            diretorio.delete();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(diretorio, true));
-            for (String string : salvar) {
-                writer.write(string + "\n");
-            }
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        documentos.remove(0);
+        salvar();
     }
 
     public static ArrayList<Doc> getArrayDocs() { // retorna um array com todas as linhas do txt
