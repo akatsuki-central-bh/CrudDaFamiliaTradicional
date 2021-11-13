@@ -6783,3 +6783,8 @@
 3439;2002;INSTRUÇÃO NORMATIVA IBAMA;Instrução Normativa IBAMA nº 01, de 26 de dezembro de 2002;Dispõe sobre o corte, a supressão e a exploração da vegetação remanescente da floresta ombrófila densa e da sua zona de transição com os demais ecossistemas florestais, no estágio inicial de regeneração e condicionada ao disposto no decreto federal n. 750/93;https://www.ibama.gov.br/component/legislacao/?view=legislacao&legislacao=111223;NÃO CONSTA REVOGAÇÃO EXPRESSA
 6784;TESTE;TESTE;TESTE;TESTE;TESTE;TESTE
 6787;TESTE;TESTE;TESTE;TESTE;TESTE;TESTE
+
+6785;TESTE 3;TESTE 3;TESTE 3;TESTE 3;TESTE 3;TESTE 3
+6787;TESTE 3;TESTE 3;TESTE 3;TESTE 3;TESTE 3;TESTE 3
+6788;CHEGA!;;;;;
+13577;Testinho novo;Testinho novo;Testinho novo;Testinho novo;Testinho novo;Testinho novo

@@ -172,7 +172,7 @@ public class TabelaDados extends javax.swing.JFrame {
     private ArrayList<Doc> pesquisar(){
         ArrayList<Doc> resultados = new ArrayList<Doc>();
         for(Doc dados : tabela_default){
-            if ( dados.getLinhaCompleta().contains(txEntrada.getText()) ){
+            if ( dados.getLinhaCompleta().toLowerCase().contains(txEntrada.getText().toLowerCase()) ){
                 resultados.add(dados);
             }
         }
@@ -198,6 +198,7 @@ public class TabelaDados extends javax.swing.JFrame {
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
         new Nova_Tela().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCriarActionPerformed
 
     /**

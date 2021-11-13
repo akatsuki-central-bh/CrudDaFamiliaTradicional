@@ -13,6 +13,8 @@ import Control.DocControler;
 import model.Doc;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  *
@@ -107,7 +109,14 @@ public class Nova_Tela extends javax.swing.JFrame {
 
 			}
 		});
-		btnDeletar = new javax.swing.JButton();
+		btnAbrirTabela = new javax.swing.JButton();
+		btnAbrirTabela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TabelaDados().setVisible(true);
+				dispose();
+			}
+		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -228,22 +237,32 @@ public class Nova_Tela extends javax.swing.JFrame {
 			}
 		});
 
-		btnDeletar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		btnDeletar.setText("Deletar");
+		btnAbrirTabela.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+		btnAbrirTabela.setText("Tabela");
 
 		javax.swing.GroupLayout pnBotoesLayout = new javax.swing.GroupLayout(pnBotoes);
+		pnBotoesLayout.setHorizontalGroup(
+			pnBotoesLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(pnBotoesLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnAbrirTabela)
+					.addPreferredGap(ComponentPlacement.RELATED, 434, Short.MAX_VALUE)
+					.addComponent(btnEditar)
+					.addGap(18)
+					.addComponent(btnCriar)
+					.addGap(20))
+		);
+		pnBotoesLayout.setVerticalGroup(
+			pnBotoesLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(pnBotoesLayout.createSequentialGroup()
+					.addGap(15)
+					.addGroup(pnBotoesLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnCriar)
+						.addComponent(btnEditar)
+						.addComponent(btnAbrirTabela))
+					.addContainerGap(15, Short.MAX_VALUE))
+		);
 		pnBotoes.setLayout(pnBotoesLayout);
-		pnBotoesLayout.setHorizontalGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-						pnBotoesLayout.createSequentialGroup()
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnDeletar).addGap(18, 18, 18).addComponent(btnEditar).addGap(18, 18, 18)
-								.addComponent(btnCriar).addGap(20, 20, 20)));
-		pnBotoesLayout.setVerticalGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(pnBotoesLayout.createSequentialGroup().addGap(15, 15, 15)
-						.addGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(btnCriar).addComponent(btnEditar).addComponent(btnDeletar))
-						.addContainerGap(15, Short.MAX_VALUE)));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -297,6 +316,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 			txEmenta.setText("");
 			tfLink.setText("");
 			tfStatus.setText("");
+			tfAno.requestFocus();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -350,7 +370,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton btnCriar;
-	private javax.swing.JButton btnDeletar;
+	private javax.swing.JButton btnAbrirTabela;
 	private javax.swing.JButton btnEditar;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JLabel lbAno;
