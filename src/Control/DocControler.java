@@ -21,17 +21,10 @@ public class DocControler {
     private static ArrayList<Doc> documentos = new ArrayList<Doc>();
 
     public static void escrever(Doc doc) { // escreve no final do txt
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(diretorio, true));
-            String linha = Integer.toString(doc.getId()) + ";" + doc.getAno() + ";" + doc.getDocumento() + ";"
-                    + doc.getAtoNormativo() + ";" + doc.getEmenta() + ";" + doc.getLink() + ";" + doc.getStatus();
-            writer.append("\n" + linha);
-            writer.close();
-            JOptionPane.showMessageDialog(null, "Documento gravado com sucesso!");
-            System.out.println("Objeto gravado com sucesso!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        documentos.add(doc);
+        salvar();
+        JOptionPane.showMessageDialog(null, "Documento gravado com sucesso!");
+        System.out.println("Objeto gravado com sucesso!");
     }
 
     public static void deletar() { // passa as linhas para um arraylist, remove o primeiro, apaga o arquivo txt e
