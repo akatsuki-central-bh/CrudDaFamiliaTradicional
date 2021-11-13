@@ -81,10 +81,6 @@ public class DocControler {
         return dados;
     }
 
-    public static void DeletarDados(int id) {
-
-    }
-
     public static int getNextId() throws FileNotFoundException {
         getArrayDocs();
         Doc lastDoc = documentos.get(documentos.size() - 1);
