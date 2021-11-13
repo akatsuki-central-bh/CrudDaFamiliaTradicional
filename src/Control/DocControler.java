@@ -92,11 +92,10 @@ public class DocControler {
     }
 
     public static void alterarDoc(Doc d) {
-        ArrayList<Doc> docs = getArrayDocs();
-        for (int i = 0; i < docs.size(); i++) {
-            if (docs.get(i).getId() == d.getId()) {
-                docs.set(i, d);
-                salvar(docs);
+        for (int i = 0; i < documentos.size(); i++) {
+            if (documentos.get(i).getId() == d.getId()) {
+                documentos.set(i, d);
+                salvar();
                 System.out.println("alterado com sucesso");
                 JOptionPane.showMessageDialog(null, "Documento Alterado com sucesso!");
                 break;
