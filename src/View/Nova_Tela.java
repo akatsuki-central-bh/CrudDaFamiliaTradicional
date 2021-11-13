@@ -89,7 +89,6 @@ public class Nova_Tela extends javax.swing.JFrame {
 		btnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
 					Doc docAlterado = new Doc(
 					0,
 					tfAno.getText(),
@@ -101,6 +100,10 @@ public class Nova_Tela extends javax.swing.JFrame {
 				);
 
 				alterarDoc(docAlterado);
+
+				new TabelaDados().setVisible(true);;
+				dispose();
+
 
 			}
 		});

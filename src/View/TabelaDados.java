@@ -13,6 +13,9 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.table.DefaultTableModel;
+
+import org.w3c.dom.events.Event;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
@@ -182,11 +185,15 @@ public class TabelaDados extends javax.swing.JFrame {
         Doc d = DocControler.getById(index);
         System.out.println(index);
         System.out.println(d.getId());
+        System.out.println(evt.getClickCount());
         if(evt.getClickCount() == 2){
             if(selecionado == null){
                 selecionado = new Nova_Tela(d);
                 selecionado.setVisible(true);
-        }}
+        }
+        selecionado=null;
+        dispose();
+    }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
