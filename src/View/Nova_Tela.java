@@ -11,12 +11,18 @@ import java.awt.event.ActionListener;
 
 import Control.DocControler;
 import model.Doc;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  *
  * @author cauaa7
  */
 public class Nova_Tela extends javax.swing.JFrame {
+
+	private int idDoc;
 
 	/**
 	 * Creates new form Nova_Tela
@@ -26,17 +32,21 @@ public class Nova_Tela extends javax.swing.JFrame {
 		initComponents();
 	}
 
-	public Nova_Tela(String[] modelo) {
+	public Nova_Tela(Doc d) {
 		initComponents();
-
-		tfAno.setText(modelo[0]);
-		tfDocumento.setText(modelo[1]);
-		tfAtoNormativo.setText(modelo[2]);
-		txEmenta.setText(modelo[3]);
-		tfLink.setText(modelo[4]);
-		tfStatus.setText(modelo[5]);
+		this.idDoc = d.getId();
+		tfAno.setText(d.getAno());
+		tfDocumento.setText(d.getDocumento());
+		tfAtoNormativo.setText(d.getAtoNormativo());
+		txEmenta.setText(d.getEmenta());
+		tfLink.setText(d.getLink());
+		tfStatus.setText(d.getStatus());
 	}
 
+	private void alterarDoc(Doc novo){
+		novo.setId(this.idDoc);
+		DocControler.alterarDoc(novo);
+	}
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,17 +75,58 @@ public class Nova_Tela extends javax.swing.JFrame {
 		txEmenta = new javax.swing.JTextArea();
 		pnBotoes = new javax.swing.JPanel();
 		btnCriar = new javax.swing.JButton();
+		btnCriar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					int id = DocControler.getNextId();
+					Doc newDoc = 	new Doc(id, tfAno.getText(), tfDocumento.getText(), tfAtoNormativo.getText(), txEmenta.getText(), tfLink.getText(), tfStatus.getText());
+					DocControler.escrever( newDoc );
+				} catch (Exception error) {
+					System.err.println(error.getMessage());
+				}
+			}
+		});
 		btnEditar = new javax.swing.JButton();
-		btnDeletar = new javax.swing.JButton();
+		btnEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+					Doc docAlterado = new Doc(
+					0,
+					tfAno.getText(),
+					tfDocumento.getText(),
+					tfAtoNormativo.getText(),
+					txEmenta.getText(),
+					tfLink.getText(),
+					tfStatus.getText()
+				);
+
+				alterarDoc(docAlterado);
+
+				new TabelaDados().setVisible(true);;
+				dispose();
+
+
+			}
+		});
+		btnAbrirTabela = new javax.swing.JButton();
+		btnAbrirTabela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TabelaDados().setVisible(true);
+				dispose();
+			}
+		});
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent evt) {
 				formWindowClosing(evt);
 			}
 		});
-
+		
+		
 		lbTopo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-		lbTopo.setText("Nome_do_Projeto");
+		lbTopo.setText("APS CRUD");
 
 		javax.swing.GroupLayout pnTopoLayout = new javax.swing.GroupLayout(pnTopo);
 		pnTopo.setLayout(pnTopoLayout);
@@ -186,22 +237,32 @@ public class Nova_Tela extends javax.swing.JFrame {
 			}
 		});
 
-		btnDeletar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		btnDeletar.setText("Deletar");
+		btnAbrirTabela.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+		btnAbrirTabela.setText("Tabela");
 
 		javax.swing.GroupLayout pnBotoesLayout = new javax.swing.GroupLayout(pnBotoes);
+		pnBotoesLayout.setHorizontalGroup(
+			pnBotoesLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(pnBotoesLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnAbrirTabela)
+					.addPreferredGap(ComponentPlacement.RELATED, 434, Short.MAX_VALUE)
+					.addComponent(btnEditar)
+					.addGap(18)
+					.addComponent(btnCriar)
+					.addGap(20))
+		);
+		pnBotoesLayout.setVerticalGroup(
+			pnBotoesLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(pnBotoesLayout.createSequentialGroup()
+					.addGap(15)
+					.addGroup(pnBotoesLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnCriar)
+						.addComponent(btnEditar)
+						.addComponent(btnAbrirTabela))
+					.addContainerGap(15, Short.MAX_VALUE))
+		);
 		pnBotoes.setLayout(pnBotoesLayout);
-		pnBotoesLayout.setHorizontalGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-						pnBotoesLayout.createSequentialGroup()
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnDeletar).addGap(18, 18, 18).addComponent(btnEditar).addGap(18, 18, 18)
-								.addComponent(btnCriar).addGap(20, 20, 20)));
-		pnBotoesLayout.setVerticalGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(pnBotoesLayout.createSequentialGroup().addGap(15, 15, 15)
-						.addGroup(pnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(btnCriar).addComponent(btnEditar).addComponent(btnDeletar))
-						.addContainerGap(15, Short.MAX_VALUE)));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -230,6 +291,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 						.addContainerGap()));
 
 		pack();
+		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditarActionPerformed
@@ -238,9 +300,23 @@ public class Nova_Tela extends javax.swing.JFrame {
 
 	private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCriarActionPerformed
 		try {
-			Doc doc = new Doc(DocControler.getNextId(), tfAno.getText(), tfDocumento.getText(), tfAtoNormativo.getText(), 
-							  txEmenta.getText(), tfLink.getText(), tfStatus.getText());
+			Doc doc = new Doc(
+				DocControler.getNextId(),
+				tfAno.getText(),
+				tfDocumento.getText(),
+				tfAtoNormativo.getText(), 
+				txEmenta.getText(),
+				tfLink.getText(),
+				tfStatus.getText()
+			);
 			DocControler.escrever(doc);
+			tfAno.setText("");
+			tfDocumento.setText("");
+			tfAtoNormativo.setText("");
+			txEmenta.setText("");
+			tfLink.setText("");
+			tfStatus.setText("");
+			tfAno.requestFocus();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -294,7 +370,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton btnCriar;
-	private javax.swing.JButton btnDeletar;
+	private javax.swing.JButton btnAbrirTabela;
 	private javax.swing.JButton btnEditar;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JLabel lbAno;

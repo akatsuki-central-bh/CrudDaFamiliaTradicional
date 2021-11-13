@@ -32,7 +32,7 @@ public class DocControler {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void deletar() { // passa as linhas para um arraylist, remove o primeiro, apaga o arquivo txt e
 		try { // cria um novo com os arquivos do arraylist
 			BufferedReader lerArq = new BufferedReader(new FileReader(diretorio));
@@ -56,14 +56,13 @@ public class DocControler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
+	
 	public static ArrayList<Doc> getArrayDocs() { // retorna um array com todas as linhas do txt
 		ArrayList<Doc> ArrayDocumentos = new ArrayList();
 		Doc doc;
 		try {
-			FileReader arq = new FileReader("legislacao-ambiental-brasileira.txt");
+			FileReader arq = new FileReader(diretorio);
 			BufferedReader lerArq = new BufferedReader(arq);
 			String linha = "";
 			try {
@@ -72,7 +71,7 @@ public class DocControler {
 					String[] colunas = linha.split(";");
 					try {
 						doc = new Doc(Integer.parseInt(colunas[0]), colunas[1], colunas[2], colunas[3], colunas[4],
-								colunas[5], colunas[6]);
+						colunas[5], colunas[6]);
 						ArrayDocumentos.add(doc);
 					} catch (Exception e) {
 						// e.printStackTrace(); 515 linhas com erro de tamanho(n tem os 5 campos
@@ -87,34 +86,34 @@ public class DocControler {
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
 		}
-
+		
 		try {
 			ordenaDados(ArrayDocumentos, 1);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-
+		
 		return ArrayDocumentos;
 	}
-
+	
 	public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao){
 		HeapSort heap = new HeapSort();
 		MergeSort merge = new MergeSort();
 		switch (modoDeOrdenacao){
 			case 1:
-				heap.heapSort(dados);
+			heap.heapSort(dados);
 			case 2:
-				merge.mergeSort(dados);
+			merge.mergeSort(dados);
 		}
 		return dados;
 	}
-
+	
 	public static void DeletarDados( int id ){
-
+		
 	}
-
+	
 	public static int getNextId() throws FileNotFoundException {
-		FileReader arq = new FileReader("legislacao-ambiental-brasileira.txt");
+		FileReader arq = new FileReader(diretorio);
 		BufferedReader lerArq = new BufferedReader(arq);
 		String linha = "";
 		try {
@@ -127,10 +126,10 @@ public class DocControler {
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null, "nao foi possivel ler o arquivo!");
 		}
-
+		
 		return nextId;
 	}
-
+	
 	public static void alterarDoc(Doc d) {
 		ArrayList<Doc> docs = getArrayDocs();
 		for (int i = 0; i < docs.size(); i++) {
@@ -138,9 +137,20 @@ public class DocControler {
 				docs.set(i, d);
 				salvar(docs);
 				System.out.println("alterado com sucesso");
+				JOptionPane.showMessageDialog(null, "Documento Alterado com sucesso!");
 				break;
 			}
 		}
+	}
+	
+	public static Doc getById(int id){
+		ArrayList<Doc> docs = getArrayDocs();
+		for(Doc doc: docs){
+			if( doc.getId()==id ){
+				return doc;
+			}
+		}
+		return null;
 	}
 
 	public static void salvar(ArrayList<Doc> listaDoc) {
@@ -160,5 +170,4 @@ public class DocControler {
 			e.printStackTrace();
 		}
 	}
-
 }

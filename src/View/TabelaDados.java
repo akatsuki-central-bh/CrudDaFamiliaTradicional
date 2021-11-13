@@ -5,35 +5,35 @@
  */
 package View;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import model.Doc;
+import Control.DocControler;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.plaf.DimensionUIResource;
 import javax.swing.table.DefaultTableModel;
 
-import Control.DocControler;
-import Control.HeapSort;
-import model.Doc;
-import model.ModosDeOrdenacao;
+import org.w3c.dom.events.Event;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+
 
 /**
  *
  * @author leanddro
  */
 public class TabelaDados extends javax.swing.JFrame {
-
     /**
      * Creates new form TabelaDados
      */
     public TabelaDados() {
         initComponents();
-        tabela_default = DocControler.ler();
-        // DocControler.ordenaDados(tabela_default, ModosDeOrdenacao.NUMERO_DECRETO_DE_LEI); <<< ---    ORDENAÇÃO
+        tabela_default = DocControler.getArrayDocs() ;
         exibirTabela(tabela_default);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,6 +49,7 @@ public class TabelaDados extends javax.swing.JFrame {
         
         for(Doc dados : tabela_){
             tabela_modelo.addRow(new Object[]{
+                dados.getId(),
                 dados.getAno(),
                 dados.getDocumento(),
                 dados.getAtoNormativo(),
@@ -60,15 +61,30 @@ public class TabelaDados extends javax.swing.JFrame {
         jTable1.setModel(tabela_modelo);
     }
     
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         txEntrada = new javax.swing.JTextField();
+        txEntrada.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		if(e.getKeyCode()==10){
+                    exibirTabela(pesquisar());
+                }
+        	}
+        });
         btnBuscar = new javax.swing.JButton();
         btnApagar = new javax.swing.JButton();
+        btnApagar.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+                DocControler.deletar();
+                exibirTabela(DocControler.getArrayDocs());
+        	}
+        });
         btnCriar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,7 +96,7 @@ public class TabelaDados extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ANO", "DOCUMENTO", "ATO NORMATIVO", "EMENTA", "LINK", "STATUS"
+                "","ANO", "DOCUMENTO", "ATO NORMATIVO", "EMENTA", "LINK", "STATUS"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,6 +104,11 @@ public class TabelaDados extends javax.swing.JFrame {
                 jTable1MouseClicked(evt);
             }
         });
+        jTable1.getColumnModel().getColumn(0).setWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.setDefaultEditor(Object.class,null);
+        // jTable1.getColumnModel().getColumn(0).set
         jScrollPane1.setViewportView(jTable1);
 
         btnBuscar.setText("Buscar");
@@ -141,33 +162,43 @@ public class TabelaDados extends javax.swing.JFrame {
         );
 
         pack();
+        setSize(new DimensionUIResource(800, 600));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        ArrayList<Doc> resultados = new ArrayList();
+        exibirTabela(pesquisar());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    private ArrayList<Doc> pesquisar(){
+        ArrayList<Doc> resultados = new ArrayList<Doc>();
         for(Doc dados : tabela_default){
-            if ( dados.getLinhaCompleta().contains(txEntrada.getText()) ){
+            if ( dados.getLinhaCompleta().toLowerCase().contains(txEntrada.getText().toLowerCase()) ){
                 resultados.add(dados);
             }
         }
-
-        exibirTabela(resultados);
-    }//GEN-LAST:event_btnBuscarActionPerformed
+        return resultados;
+    }
     private Nova_Tela selecionado;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // int indice = jTable1.getSelectedRow();
-        // String[] modelo = tabela.get(indice);
-        // if(selecionado == null){
-        //     selecionado = new Nova_Tela(modelo);
-        //     selecionado.setVisible(true);
-        // }else{
-        //     selecionado.setModelo(modelo);
-        // }
-            
+        int row = jTable1.getSelectedRow();
+        int index =(Integer) jTable1.getValueAt(row, 0);
+        Doc d = DocControler.getById(index);
+        System.out.println(index);
+        System.out.println(d.getId());
+        System.out.println(evt.getClickCount());
+        if(evt.getClickCount() == 2){
+            if(selecionado == null){
+                selecionado = new Nova_Tela(d);
+                selecionado.setVisible(true);
+        }
+        selecionado=null;
+        dispose();
+    }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
         new Nova_Tela().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCriarActionPerformed
 
     /**
