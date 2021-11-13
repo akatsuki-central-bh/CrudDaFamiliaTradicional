@@ -86,21 +86,9 @@ public class DocControler {
     }
 
     public static int getNextId() throws FileNotFoundException {
-        FileReader arq = new FileReader(diretorio);
-        BufferedReader lerArq = new BufferedReader(arq);
-        String linha = "";
-        try {
-            linha = lerArq.readLine();
-            while (linha != null) {
-                nextId++;
-                linha = lerArq.readLine();
-            }
-            arq.close();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "nao foi possivel ler o arquivo!");
-        }
-
-        return nextId;
+        getArrayDocs();
+        Doc lastDoc = documentos.get(documentos.size() - 1);
+        return  lastDoc.getId() + 1;
     }
 
     public static void alterarDoc(Doc d) {
