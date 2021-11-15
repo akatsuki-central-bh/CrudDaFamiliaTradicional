@@ -5,6 +5,18 @@
  */
 package View;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import Control.DocControler;
+import Control.RelatorioController;
+import Helpers.MillisToTime;
+import model.Doc;
+
 /**
  *
  * @author leanddro
@@ -29,32 +41,31 @@ public class Relatorio extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        qtdListas = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        tempoMedioHeapSort = new javax.swing.JLabel();
+        melhorTempoHeapSort = new javax.swing.JLabel();
+        piorTempoHeapSort = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableHeapSort = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        melhorTempoMergeSort = new javax.swing.JLabel();
+        piorTempoMergeSort = new javax.swing.JLabel();
+        tempoMedioMergeSort = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableMergeSort = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JButton();
+        btnComparar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,13 +73,24 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("RELATÓRIO DOS CRIA");
 
+        jLabel9.setText("Quantidade de listas:");
+
+        qtdListas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        qtdListas.setSelectedIndex(0);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(qtdListas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -76,10 +98,13 @@ public class Relatorio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(jLabel14)
-                .addGap(41, 41, 41))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(qtdListas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -87,25 +112,35 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Heap Sort");
 
-        jLabel3.setText("Comparações feitas:");
-
-        jLabel6.setText("Itens acessados:");
-
         jLabel8.setText("Tempo médio de processamento:");
 
         jLabel7.setText("Melhor tempo de processamento:");
 
         jLabel10.setText("Pior tempo de processamento:");
 
-        jLabel15.setText("jLabel15");
+        tempoMedioHeapSort.setText("0");
 
-        jLabel16.setText("jLabel15");
+        melhorTempoHeapSort.setText("0");
 
-        jLabel17.setText("jLabel15");
+        piorTempoHeapSort.setText("0");
 
-        jLabel18.setText("jLabel15");
+        tableHeapSort.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel19.setText("jLabel15");
+            },
+            new String [] {
+                "Tentativa", "Comparações", "Itens acessados", "Tempo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tableHeapSort);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,22 +154,17 @@ public class Relatorio extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel17))
+                            .addComponent(tempoMedioHeapSort)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jLabel16))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(piorTempoHeapSort)
+                                    .addComponent(melhorTempoHeapSort))))
+                        .addGap(0, 270, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -142,27 +172,21 @@ public class Relatorio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel16))
+                    .addComponent(melhorTempoHeapSort))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel17))
+                    .addComponent(piorTempoHeapSort))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel15))
-                .addContainerGap(191, Short.MAX_VALUE))
+                    .addComponent(tempoMedioHeapSort))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.add(jPanel1);
@@ -173,25 +197,35 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Merge Sort");
 
-        jLabel4.setText("Comparações feitas:");
-
-        jLabel5.setText("Itens acessados:");
-
         jLabel12.setText("Pior tempo de processamento:");
 
         jLabel11.setText("Tempo médio de processamento:");
 
         jLabel13.setText("Melhor tempo de processamento:");
 
-        jLabel22.setText("jLabel15");
+        melhorTempoMergeSort.setText("0");
 
-        jLabel23.setText("jLabel15");
+        piorTempoMergeSort.setText("0");
 
-        jLabel21.setText("jLabel15");
+        tempoMedioMergeSort.setText("0");
 
-        jLabel20.setText("jLabel15");
+        tableMergeSort.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel24.setText("jLabel15");
+            },
+            new String [] {
+                "Tentativa", "Comparações", "Itens acessados", "Tempo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tableMergeSort);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -201,24 +235,22 @@ public class Relatorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel11)
                             .addComponent(jLabel13)
                             .addComponent(jLabel12))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel20)
+                            .addComponent(tempoMedioMergeSort)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel21)
-                                    .addComponent(jLabel24)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel22))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(piorTempoMergeSort)
+                                    .addComponent(melhorTempoMergeSort))))
+                        .addGap(0, 264, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -226,34 +258,39 @@ public class Relatorio extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel11))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
+                        .addComponent(melhorTempoMergeSort)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel23)
+                        .addComponent(piorTempoMergeSort)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel20)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                        .addComponent(tempoMedioMergeSort)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.add(jPanel2);
 
-        jButton1.setText("Voltar");
+        btnVoltar.setText("Voltar");
+
+        btnComparar.setText("Comparar");
+
+        btnComparar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                String qtd = (String) qtdListas.getSelectedItem();
+                mergeSort(Integer.parseInt(qtd));
+                heapSort(Integer.parseInt(qtd));
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,10 +300,11 @@ public class Relatorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btnVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnComparar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -276,14 +314,82 @@ public class Relatorio extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVoltar)
+                    .addComponent(btnComparar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void insertTable(JTable tabela, Object[] obj){
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        model.addRow(obj);
+    }
 
+    private void heapSort(int qtd){
+        ArrayList<Long> milliss = new ArrayList();
+        for(int tentativa = 0; tentativa < qtd; tentativa++){
+            ArrayList<Doc> documentos = DocControler.getArrayDocs();
+            RelatorioController rc = new RelatorioController(documentos);
+            rc.heapSort();
+            milliss.add(rc.getMillis());
+            Object[] obj = new Object[]{ tentativa + 1, rc.getQtdComparacoes(), rc.getQtdItensPercorridos(), rc.getTempo() };
+            insertTable(tableHeapSort, obj);
+        }
+        setDadosHeapSort(milliss);
+    }
+
+    private void mergeSort(int qtd){
+        ArrayList<Long> milliss = new ArrayList();
+        for(int tentativa = 0; tentativa < qtd; tentativa++){
+            ArrayList<Doc> documentos = DocControler.getArrayDocs();
+            RelatorioController rc = new RelatorioController(documentos);
+            rc.mergeSort();
+            milliss.add(rc.getMillis());
+            Object[] obj = new Object[]{ tentativa + 1, rc.getQtdComparacoes(), rc.getQtdItensPercorridos(), rc.getTempo() };
+            insertTable(tableMergeSort, obj);
+        }
+        setDadosMergeSort(milliss);
+    }
+
+    private void setDadosMergeSort(ArrayList<Long> milliss){
+        long pior = 0;
+        long melhor = milliss.get(0);
+        long media = 0;
+
+        for(long millis : milliss){
+            if(millis > pior) pior = millis;
+            if(millis < melhor) melhor = millis;
+            media += millis;
+        }
+
+        media = media / milliss.size();
+
+        piorTempoMergeSort.setText(MillisToTime.convert(pior));
+        melhorTempoMergeSort.setText(MillisToTime.convert(melhor));
+        tempoMedioMergeSort.setText(MillisToTime.convert(media));
+    }
+
+    private void setDadosHeapSort(ArrayList<Long> milliss){
+        long pior = 0;
+        long melhor = milliss.get(0);
+        long media = 0;
+
+        for(long millis : milliss){
+            if(millis > pior) pior = millis;
+            if(millis < melhor) melhor = millis;
+            media += millis;
+        }
+
+        media = media / milliss.size();
+
+        piorTempoHeapSort.setText(MillisToTime.convert(pior));
+        melhorTempoHeapSort.setText(MillisToTime.convert(melhor));
+        tempoMedioHeapSort.setText(MillisToTime.convert(media));
+    }
     /**
      * @param args the command line arguments
      */
@@ -320,33 +426,32 @@ public class Relatorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnComparar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel melhorTempoHeapSort;
+    private javax.swing.JLabel melhorTempoMergeSort;
+    private javax.swing.JLabel piorTempoHeapSort;
+    private javax.swing.JLabel piorTempoMergeSort;
+    private javax.swing.JComboBox<String> qtdListas;
+    private javax.swing.JTable tableHeapSort;
+    private javax.swing.JTable tableMergeSort;
+    private javax.swing.JLabel tempoMedioHeapSort;
+    private javax.swing.JLabel tempoMedioMergeSort;
     // End of variables declaration//GEN-END:variables
 }
