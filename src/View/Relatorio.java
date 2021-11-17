@@ -280,7 +280,16 @@ public class Relatorio extends javax.swing.JFrame {
         jPanel3.add(jPanel2);
 
         btnVoltar.setText("Voltar");
-
+        
+        btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                Principal princ = new Principal();
+                princ.setVisible(true);
+                dispose();
+            }
+        });
+        
         btnComparar.setText("Comparar");
 
         btnComparar.addMouseListener(new MouseAdapter() {
