@@ -14,7 +14,7 @@ import model.Doc;
 public class teste {
 	public static void escrever() { 
 		try {
-			Doc doc = new Doc(8000, "2055", "DocTeste", "AtoNormativo Teste", "EmentaTest", "Teste", "Teste");
+			Doc doc = new Doc(8000, 2055, "DocTeste", "AtoNormativo Teste", "EmentaTest", "Teste", "Teste");
 			BufferedWriter writer = new BufferedWriter(new FileWriter(DocControler.diretorio, true));
 			String linha = doc.getLinha();
 			writer.append("\n" + linha);

@@ -43,7 +43,7 @@ public class DocControler {
                 while (linha != null) {
                     String[] colunas = linha.split(";");
                     try {
-                        Doc doc = new Doc(Integer.parseInt(colunas[0]), colunas[1], colunas[2], colunas[3], colunas[4],
+                        Doc doc = new Doc(Integer.parseInt(colunas[0]), Integer.parseInt(colunas[1]), colunas[2], colunas[3], colunas[4],
                                 colunas[5], colunas[6]);
                         documentos.add(doc);
                     } catch (Exception e) {
@@ -60,25 +60,7 @@ public class DocControler {
             JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
         }
 
-        try {
-            ordenaDados(documentos, 1);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-
         return documentos;
-    }
-
-    public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao) {
-        HeapSort heap = new HeapSort();
-        MergeSort merge = new MergeSort();
-        switch (modoDeOrdenacao) {
-        case 1:
-            heap.heapSort(dados);
-        case 2:
-            merge.mergeSort(dados);
-        }
-        return dados;
     }
 
     public static int getNextId() throws FileNotFoundException {
