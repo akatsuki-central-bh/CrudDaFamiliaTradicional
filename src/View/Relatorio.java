@@ -72,7 +72,7 @@ public class Relatorio extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("RELATÓRIO DOS CRIA");
+        jLabel14.setText("RELATÓRIO");
 
         jLabel9.setText("Quantidade de listas:");
 
