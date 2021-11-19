@@ -198,7 +198,7 @@ public class TabelaDados extends javax.swing.JFrame {
         }
         return resultados;
     }
-    private Nova_Tela selecionado;
+    private TelaEdicao selecionado;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int row = jTable1.getSelectedRow();
         int index =(Integer) jTable1.getValueAt(row, 0);
@@ -208,7 +208,7 @@ public class TabelaDados extends javax.swing.JFrame {
         System.out.println(evt.getClickCount());
         if(evt.getClickCount() == 2){
             if(selecionado == null){
-                selecionado = new Nova_Tela(d);
+                selecionado = new TelaEdicao(d);
                 selecionado.setVisible(true);
         }
         selecionado=null;
@@ -217,7 +217,7 @@ public class TabelaDados extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
-        new Nova_Tela().setVisible(true);
+        new TelaEdicao().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCriarActionPerformed
 
