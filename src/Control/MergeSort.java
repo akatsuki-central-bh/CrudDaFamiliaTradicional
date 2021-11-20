@@ -21,9 +21,11 @@ import model.Doc;
 public class MergeSort {
   private int qtdComparacoes = 0;
   private int qtdItensPercorridos = 0;
-
+  private ArrayList<Doc> lista;
+  
   public void mergeSort(ArrayList<Doc> lista) {
-    int listaLength = lista.size();
+	this.lista = lista;  
+	int listaLength = lista.size();
     if (listaLength < 2) { // RERIFICAÇÃO PARA PARAR A RECURSIVIDADE
       qtdComparacoes++;
       return;
@@ -95,5 +97,9 @@ public class MergeSort {
 
   public int getQtdItensPercorridos(){
     return qtdItensPercorridos;
+  }
+  
+  public ArrayList<Doc> getLista (){
+	  return this.lista;
   }
 }
