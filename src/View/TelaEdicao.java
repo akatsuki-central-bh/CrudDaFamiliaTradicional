@@ -5,10 +5,6 @@
  */
 package View;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-
 import Control.DocControler;
 import model.Doc;
 import java.awt.event.MouseAdapter;
@@ -20,7 +16,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  *
  * @author cauaa7
  */
-public class Nova_Tela extends javax.swing.JFrame {
+public class TelaEdicao extends javax.swing.JFrame {
 
 	private int idDoc;
 
@@ -28,14 +24,14 @@ public class Nova_Tela extends javax.swing.JFrame {
 	 * Creates new form Nova_Tela
 	 */
 
-	public Nova_Tela() {
+	public TelaEdicao() {
 		initComponents();
 	}
 
-	public Nova_Tela(Doc d) {
+	public TelaEdicao(Doc d) {
 		initComponents();
 		this.idDoc = d.getId();
-		tfAno.setText(d.getAno());
+		tfAno.setText(String.valueOf(d.getAno()));
 		tfDocumento.setText(d.getDocumento());
 		tfAtoNormativo.setText(d.getAtoNormativo());
 		txEmenta.setText(d.getEmenta());
@@ -80,7 +76,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					int id = DocControler.getNextId();
-					Doc newDoc = 	new Doc(id, tfAno.getText(), tfDocumento.getText(), tfAtoNormativo.getText(), txEmenta.getText(), tfLink.getText(), tfStatus.getText());
+					Doc newDoc = 	new Doc(id, Integer.parseInt(tfAno.getText()), tfDocumento.getText(), tfAtoNormativo.getText(), txEmenta.getText(), tfLink.getText(), tfStatus.getText());
 					DocControler.escrever( newDoc );
 				} catch (Exception error) {
 					System.err.println(error.getMessage());
@@ -93,7 +89,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 			public void mouseClicked(MouseEvent e) {
 					Doc docAlterado = new Doc(
 					0,
-					tfAno.getText(),
+					Integer.parseInt(tfAno.getText()),
 					tfDocumento.getText(),
 					tfAtoNormativo.getText(),
 					txEmenta.getText(),
@@ -302,7 +298,7 @@ public class Nova_Tela extends javax.swing.JFrame {
 		try {
 			Doc doc = new Doc(
 				DocControler.getNextId(),
-				tfAno.getText(),
+				Integer.parseInt(tfAno.getText()),
 				tfDocumento.getText(),
 				tfAtoNormativo.getText(), 
 				txEmenta.getText(),
@@ -350,20 +346,20 @@ public class Nova_Tela extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(Nova_Tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(TelaEdicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(Nova_Tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(TelaEdicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(Nova_Tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(TelaEdicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(Nova_Tela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(TelaEdicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		// </editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new Nova_Tela().setVisible(true);
+				new TelaEdicao().setVisible(true);
 			}
 		});
 	}

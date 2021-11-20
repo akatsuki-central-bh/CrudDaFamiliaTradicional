@@ -70,7 +70,7 @@ public class DocControler {
 				while (linha != null) {
 					String[] colunas = linha.split(";");
 					try {
-						doc = new Doc(Integer.parseInt(colunas[0]), colunas[1], colunas[2], colunas[3], colunas[4],
+						doc = new Doc(Integer.parseInt(colunas[0]), Integer.parseInt(colunas[1]), colunas[2], colunas[3], colunas[4],
 						colunas[5], colunas[6]);
 						ArrayDocumentos.add(doc);
 					} catch (Exception e) {
@@ -97,14 +97,14 @@ public class DocControler {
 	}
 	
 	public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao){
-		HeapSort heap = new HeapSort();
-		MergeSort merge = new MergeSort();
-		switch (modoDeOrdenacao){
-			case 1:
-			heap.heapSort(dados);
-			case 2:
-			merge.mergeSort(dados);
-		}
+		// HeapSort heap = new HeapSort();
+		// MergeSort merge = new MergeSort();
+		// switch (modoDeOrdenacao){
+		// 	case 1:
+		// 	heap.heapSort(dados);
+		// 	case 2:
+		// 	merge.mergeSort(dados);
+		// }
 		return dados;
 	}
 	

@@ -1,11 +1,12 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Doc implements Serializable {
 	private static final long serialVersionUID = 1L;
 	int id;
-	String ano;
+	int ano;
 	String documento;
 	String atoNormativo;
 	String ementa;
@@ -13,7 +14,7 @@ public class Doc implements Serializable {
 	String status;
 
 	
-	public Doc(int id, String ano, String documento, String atoNormativo, String ementa, String link, String status) {
+	public Doc(int id, int ano, String documento, String atoNormativo, String ementa, String link, String status) {
 		this.id = id;
 		this.ano = ano;
 		this.documento = documento;
@@ -28,11 +29,11 @@ public class Doc implements Serializable {
 					+ ";" + this.getLink() + ";" + this.getStatus();
 	}
 
-	public String getAno() {
+	public int getAno() {
 		return ano;
 	}
 
-	public void setAno(String ano) {
+	public void setAno(int ano) {
 		this.ano = ano;
 	}
 

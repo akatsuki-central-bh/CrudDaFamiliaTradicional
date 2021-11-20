@@ -19,6 +19,12 @@ import org.w3c.dom.events.Event;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import javax.swing.JButton;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 /**
@@ -126,40 +132,54 @@ public class TabelaDados extends javax.swing.JFrame {
                 btnCriarActionPerformed(evt);
             }
         });
+        
+        JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		new Relatorio().setVisible(true);
+        		dispose();
+        	}
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCriar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnApagar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar)))
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(layout.createSequentialGroup()
+        							.addComponent(txEntrada, GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+        							.addGap(18)
+        							.addComponent(btnBuscar)))
+        					.addContainerGap())
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(btnCriar)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(btnApagar)
+        					.addPreferredGap(ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
+        					.addComponent(btnVoltar)
+        					.addGap(29))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnApagar)
-                    .addComponent(btnCriar))
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(txEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnBuscar))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnCriar)
+        				.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnApagar))
+        			.addContainerGap())
         );
+        getContentPane().setLayout(layout);
 
         pack();
         setSize(new DimensionUIResource(800, 600));
@@ -178,7 +198,7 @@ public class TabelaDados extends javax.swing.JFrame {
         }
         return resultados;
     }
-    private Nova_Tela selecionado;
+    private TelaEdicao selecionado;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int row = jTable1.getSelectedRow();
         int index =(Integer) jTable1.getValueAt(row, 0);
@@ -188,7 +208,7 @@ public class TabelaDados extends javax.swing.JFrame {
         System.out.println(evt.getClickCount());
         if(evt.getClickCount() == 2){
             if(selecionado == null){
-                selecionado = new Nova_Tela(d);
+                selecionado = new TelaEdicao(d);
                 selecionado.setVisible(true);
         }
         selecionado=null;
@@ -197,7 +217,7 @@ public class TabelaDados extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
-        new Nova_Tela().setVisible(true);
+        new TelaEdicao().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCriarActionPerformed
 
@@ -243,5 +263,4 @@ public class TabelaDados extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txEntrada;
-    // End of variables declaration//GEN-END:variables
 }
