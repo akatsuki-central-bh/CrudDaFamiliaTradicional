@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 import model.Doc;
 
 public class DocControler {
-	public static int count = 0;
-	public static int nextId;
-	public static File diretorio = new File("legislacao-ambiental-brasileira.txt");
+    public static int count = 0;
+    public static int nextId;
+    public static File diretorio = new File("legislacao-ambiental-brasileira.txt");
 
 	public static void escrever(Doc doc) { // escreve no final do txt
 		try {
