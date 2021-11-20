@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -32,7 +33,7 @@ public class DocControler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void deletar() { // passa as linhas para um arraylist, remove o primeiro, apaga o arquivo txt e
 		try { // cria um novo com os arquivos do arraylist
 			BufferedReader lerArq = new BufferedReader(new FileReader(diretorio));
@@ -57,7 +58,7 @@ public class DocControler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static ArrayList<Doc> getArrayDocs() { // retorna um array com todas as linhas do txt
 		ArrayList<Doc> ArrayDocumentos = new ArrayList();
 		Doc doc;
@@ -70,8 +71,8 @@ public class DocControler {
 				while (linha != null) {
 					String[] colunas = linha.split(";");
 					try {
-						doc = new Doc(Integer.parseInt(colunas[0]), Integer.parseInt(colunas[1]), colunas[2], colunas[3], colunas[4],
-						colunas[5], colunas[6]);
+						doc = new Doc(Integer.parseInt(colunas[0]), Integer.parseInt(colunas[1]), colunas[2],
+								colunas[3], colunas[4], colunas[5], colunas[6]);
 						ArrayDocumentos.add(doc);
 					} catch (Exception e) {
 						// e.printStackTrace(); 515 linhas com erro de tamanho(n tem os 5 campos
@@ -86,32 +87,32 @@ public class DocControler {
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
 		}
-		
+
 		try {
 			ordenaDados(ArrayDocumentos, 1);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		
+
 		return ArrayDocumentos;
 	}
-	
-	public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao){
+
+	public static ArrayList<Doc> ordenaDados(ArrayList<Doc> dados, int modoDeOrdenacao) {
 		// HeapSort heap = new HeapSort();
 		// MergeSort merge = new MergeSort();
 		// switch (modoDeOrdenacao){
-		// 	case 1:
-		// 	heap.heapSort(dados);
-		// 	case 2:
-		// 	merge.mergeSort(dados);
+		// case 1:
+		// heap.heapSort(dados);
+		// case 2:
+		// merge.mergeSort(dados);
 		// }
 		return dados;
 	}
-	
-	public static void DeletarDados( int id ){
-		
+
+	public static void DeletarDados(int id) {
+
 	}
-	
+
 	public static int getNextId() throws FileNotFoundException {
 		FileReader arq = new FileReader(diretorio);
 		BufferedReader lerArq = new BufferedReader(arq);
@@ -126,10 +127,10 @@ public class DocControler {
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(null, "nao foi possivel ler o arquivo!");
 		}
-		
+
 		return nextId;
 	}
-	
+
 	public static void alterarDoc(Doc d) {
 		ArrayList<Doc> docs = getArrayDocs();
 		for (int i = 0; i < docs.size(); i++) {
@@ -142,11 +143,11 @@ public class DocControler {
 			}
 		}
 	}
-	
-	public static Doc getById(int id){
+
+	public static Doc getById(int id) {
 		ArrayList<Doc> docs = getArrayDocs();
-		for(Doc doc: docs){
-			if( doc.getId()==id ){
+		for (Doc doc : docs) {
+			if (doc.getId() == id) {
 				return doc;
 			}
 		}
@@ -162,12 +163,55 @@ public class DocControler {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(diretorio, true));
 			for (String linha : listaString) {
-				writer.write(linha+"\n");
+				writer.write(linha + "\n");
 			}
 			writer.flush();
 			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static ArrayList<Doc> embaralhar(ArrayList<Doc> documentos) {
+		ArrayList<Doc> documentos_ = new ArrayList();
+		while (documentos.size() > 0) {
+			Random indice = new Random();
+			Doc doc = documentos.remove(indice.nextInt(documentos.size()));
+			documentos_.add(doc);
+		}
+
+		return documentos_;
+	}
+	
+	public static ArrayList<Doc> getEntrada(){
+		ArrayList<Doc> ArrayDocumentos = new ArrayList();
+		Doc doc;
+		File dir = new File("Entrada.txt");
+		try {
+			FileReader arq = new FileReader(dir);
+			BufferedReader lerArq = new BufferedReader(arq);
+			String linha = "";
+			try {
+				linha = lerArq.readLine();
+				while (linha != null) {
+					String[] colunas = linha.split(";");
+					try {
+						doc = new Doc(Integer.parseInt(colunas[0]), Integer.parseInt(colunas[1]), colunas[2],
+								colunas[3], colunas[4], colunas[5], colunas[6]);
+						ArrayDocumentos.add(doc);
+					} catch (Exception e) {
+						// e.printStackTrace(); 515 linhas com erro de tamanho(n tem os 5 campos
+						// preenchidos)
+					}
+					linha = lerArq.readLine();
+				}
+				arq.close();
+			} catch (IOException ex) {
+				JOptionPane.showMessageDialog(null, "nao foi possivel ler o arquivo!");
+			}
+		} catch (FileNotFoundException ex) {
+			JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
+		}
+		return ArrayDocumentos;
 	}
 }

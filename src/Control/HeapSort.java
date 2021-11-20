@@ -71,4 +71,8 @@ public class HeapSort {
   public int getQtdItensPercorridos(){
     return qtdItensPercorridos;
   }
+  
+  public ArrayList<Doc> getLista (){
+	  return this.lista;
+  }
 }
